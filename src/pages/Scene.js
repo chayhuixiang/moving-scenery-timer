@@ -7,7 +7,7 @@ import SceneField from "../components/SceneField";
 import { useState, useEffect } from "react";
 
 function Scene() {
-  const [time, setTime] = useState(480);
+  const [time, setTime] = useState(600);
   const [timerActive, setTimerActive] = useState(false);
   const [startButtonWord, setStartButtonWord] = useState("Start");
 
@@ -25,7 +25,7 @@ function Scene() {
 
   const resetHandler = () => {
     setTimerActive(false);
-    setTime(480);
+    setTime(600);
     setStartButtonWord("Start");
   };
 

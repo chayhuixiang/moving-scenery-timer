@@ -7,9 +7,11 @@ import Rules from "../components/Rules";
 import { useState, useEffect } from "react";
 
 function Main() {
-  const [time, setTime] = useState(480);
+  const [time, setTime] = useState(600);
   const [timerActive, setTimerActive] = useState(false);
   const [startButtonWord, setStartButtonWord] = useState("Start");
+  const [audio] = useState(new Audio('https://actions.google.com/sounds/v1/alarms/bugle_tune.ogg')); 
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -20,13 +22,28 @@ function Main() {
         });
       }, 1000);
     }
+    if (!time){
+      clearTimeout(timer);
+    }
     return () => clearTimeout(timer);
   });
 
+  useEffect(()=>{
+    if (!time){
+      setPlaying(true);
+    }
+    if (playing){
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  },[time, playing, audio]);
+
   const resetHandler = () => {
     setTimerActive(false);
-    setTime(480);
+    setTime(600);
     setStartButtonWord("Start");
+    setPlaying(false);
   };
 
   const startHandler = () => {
